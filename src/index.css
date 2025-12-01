@@ -19,7 +19,7 @@ code {
 }
 
 body {
-  background-color: #3b2b2b;
+  background-color: #F6F6F6;
 }
 
 .mainBox {
@@ -29,18 +29,20 @@ body {
   height: 100vh;
 }
 .mainBoxCoffee {
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  justify-content: left ;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
+  margin-right: 0%;
 }
 
-/* ---------- LEFT MENU ---------- */
 .leftBox {
-  width: 18%;
-  background-color: #f4f1ec;
+  width: 14%;
+  background-color: #FFFFFF;
   border-radius: 20px;
   padding: 4rem 3%;
-  margin: 15% 15% 15% 3%;
+  margin: 15% 9% 9% 3%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,38 +51,48 @@ body {
 
 .scrollBox {
   width: 100%;
+  justify-content: center;
 }
 
 .categoryCoffees {
   width: 100%;
-  padding: 15px 25px;
+  padding: 15px 5px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  justify-content: center;
+  border-radius: 10px;
+  margin-bottom: 10%;
+  background-color: transparent;
+}
+
+.activeCategory {
+  background-color: #f4f1ec;
+; /* любой цвет */
+  color: white;
 }
 
 .categoryCoffees:hover {
-  background-color: #e6dfd6;
+  background-color: #ecd4b4;
 }
 
 .textCategoryCoffee {
   color: #432c2c;
   font-size: 18px;
   font-weight: 500;
+  text-align: center;
 }
 
-/* ---------- RIGHT SIDE ---------- */
 .rightBox {
-  margin-left: 29%;
-  width: 82%;
+  margin-left: 20%;
   padding: 25px;
 }
 
-/* ---------- HEADER ---------- */
 .headerBox {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 25px;
+  margin-right: 3%;
 }
 
 .searchInput {
@@ -129,6 +141,7 @@ body {
   text-align: center;
   transition: transform 0.2s ease-in-out;
   cursor: pointer;
+
 }
 .coffeeImage {
   width: 100%;
@@ -147,8 +160,8 @@ body {
 }
 
 .coffeePrice {
-  display: flex;
   align-items: center;
+  text-align: center;
   justify-content: space-between;
   margin-top: 10px;
   font-size: 17px;

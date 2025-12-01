@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
 let coffeeList = [
   { "name": "Classic Cappuccino", type: "cappuccino", image: "/images/Classic Cappuccino.jpeg", size: "", milk: "", sugar: "", milkType: "", price: 530 },
@@ -19,37 +20,38 @@ let coffeeList = [
 ];
 
 
-const showCoffeeList = () => {
-  return coffeeList.map(e => (
-      <div className="coffeeCard">
+const ShowCoffeeList = ({filteredCoffee}) => {
+  return coffeeList.filter(t =>filteredCoffee === "All" || t.type === filteredCoffee.trim()).map(e => (
+    <div className="coffeeCard">
         <img src={e.image} className="coffeeImage"></img>
         <h2 className="coffeeName">{e.name}</h2>
-        <h3 className="coffeePrice">{e.price}RUB</h3>
+        <h3 className="coffeePrice">{e.price} RUB</h3>
       </div>
   ));
 }
 function App() {
+  const [filteredCoffee, setFilteredCoffeeList] = useState("All");
   return (
   <div>
     <div className="mainBox">
-      <div className="leftBox">
+      x<div className="leftBox">
         <div className="scrollBox">
-          <div className="categoryCoffees" >
+          <div className={`categoryCoffees ${filteredCoffee === "All" ? "activeCategory" : ""}`} onClick={() => setFilteredCoffeeList("All")}>
             <h2 className="textCategoryCoffee">All</h2>
           </div>
-          <div className="categoryCoffees">
+          <div className={`categoryCoffees ${filteredCoffee === "cappuccino" ? "activeCategory" : ""}`} onClick={() => setFilteredCoffeeList("cappuccino")}>
             <h2 className="textCategoryCoffee">Cappuccino</h2>
           </div>
-          <div className="categoryCoffees">
+          <div className={`categoryCoffees ${filteredCoffee === "latte" ? "activeCategory" : ""}`} onClick={() => setFilteredCoffeeList("latte")}>
             <h2 className="textCategoryCoffee">Latte</h2>
           </div>
-          <div className="categoryCoffees">
-            <h2 className="textCategoryCoffee">Espresso</h2>
-          </div>
-          <div className="categoryCoffees">
+          <div className={`categoryCoffees ${filteredCoffee === "americano" ? "activeCategory" : ""}`} onClick={() => setFilteredCoffeeList("americano")}>
             <h2 className="textCategoryCoffee">Americano</h2>
           </div>
-        </div>
+          <div className={`categoryCoffees ${filteredCoffee === "flatwhite" ? "activeCategory" : ""}`} onClick={() => setFilteredCoffeeList("flatwhite")}>
+            <h2 className="textCategoryCoffee">Flat White</h2>
+          </div>
+      </div>
       </div>
       <div className="rightBox">
         <div className="headerBox">
@@ -60,7 +62,7 @@ function App() {
           </div>
         </div>
         <div className="mainBoxCoffee">
-          {showCoffeeList()}
+          {<ShowCoffeeList filteredCoffee={filteredCoffee}/>}
         </div>
       </div>
     </div>

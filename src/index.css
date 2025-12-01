@@ -11,3 +11,151 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+  background-color: #3b2b2b;
+}
+
+.mainBox {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+}
+.mainBoxCoffee {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+/* ---------- LEFT MENU ---------- */
+.leftBox {
+  width: 18%;
+  background-color: #f4f1ec;
+  border-radius: 20px;
+  padding: 4rem 3%;
+  margin: 15% 15% 15% 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed; 
+}
+
+.scrollBox {
+  width: 100%;
+}
+
+.categoryCoffees {
+  width: 100%;
+  padding: 15px 25px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.categoryCoffees:hover {
+  background-color: #e6dfd6;
+}
+
+.textCategoryCoffee {
+  color: #432c2c;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* ---------- RIGHT SIDE ---------- */
+.rightBox {
+  margin-left: 29%;
+  width: 82%;
+  padding: 25px;
+}
+
+/* ---------- HEADER ---------- */
+.headerBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.searchInput {
+  width: 75%;
+  padding: 15px 20px;
+  border-radius: 30px;
+  border: none;
+  background-color: #f4f1ec;
+  font-size: 16px;
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: #9b8d83;
+}
+
+.basketBox {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.basketImage {
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+}
+
+.basketCount {
+  background-color: #b94733;
+  color: white;
+  font-size: 14px;
+  padding: 3px 8px;
+  border-radius: 50%;
+  position: absolute;
+  top: -5px;
+  right: -10px;
+}
+
+/* ---------- COFFEE CARDS ---------- */
+
+.coffeeCard {
+  background-color: #f4f1ec;
+  border-radius: 20px;
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+}
+.coffeeImage {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+}
+
+.coffeeCard:hover {
+  transform: translateY(-5px);
+}
+
+.coffeeName {
+  margin: 10px 0;
+  font-size: 18px;
+  color: #432c2c;
+}
+
+.coffeePrice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 17px;
+}
+
+.priceValue {
+  background-color: #d5d2cd;
+  padding: 5px 12px;
+  border-radius: 10px;
+}

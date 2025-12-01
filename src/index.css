@@ -163,7 +163,6 @@ body {
   align-items: center;
   text-align: center;
   justify-content: space-between;
-  margin-top: 10px;
   font-size: 17px;
 }
 
@@ -171,4 +170,50 @@ body {
   background-color: #d5d2cd;
   padding: 5px 12px;
   border-radius: 10px;
+}
+.footerCoffeeCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%;
+  margin: 0 auto;
+  background-color: #DADADA;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.removeToBasketButton,
+.addToBasketButton {
+  background: #d3c9c9;
+  color: #000000;
+  border: none;
+  border-radius: 1rem;
+  padding: 0.6rem 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.removeToBasketButton:hover,
+.addToBasketButton:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  background: #d1b084;
+}
+
+.removeToBasketButton:active,
+.addToBasketButton:active {
+  transform: scale(0.95);
+  box-shadow: 0 3px 7px rgba(0,0,0,0.1);
+}
+.coffeeCountInBasket {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #432c2c;
+}
+
+.invisible {
+  display: none;
 }

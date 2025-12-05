@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 import Sidebar from "./Sidebar";
+import CoffeePage from './CoffeePage';
 import { BrowserRouter } from "react-router-dom";
 
 let coffeeList = [
@@ -22,7 +23,7 @@ let coffeeList = [
 ];
 
 
-const ShowCoffeeList = ({ filteredCoffee, AddCoffeeInBascket, bascket }) => {
+const ShowCoffeeList = ({ filteredCoffee, AddCoffeeInBascket, bascket, setFlagCoffeePage}) => {
   return coffeeList
     .filter(t => filteredCoffee === "All" || t.type === filteredCoffee.trim())
     .map(e => {
@@ -31,7 +32,7 @@ const ShowCoffeeList = ({ filteredCoffee, AddCoffeeInBascket, bascket }) => {
       const count = inBasket ? inBasket.count : 0;
 
       return (
-        <div className="coffeeCard">
+        <div className="coffeeCard" onClick={() => setFlagCoffeePage(flag => !flag)}>
           <img src={e.image} className="coffeeImage" />
           <h2 className="coffeeName">{e.name}</h2>
 
@@ -49,12 +50,21 @@ const ShowCoffeeList = ({ filteredCoffee, AddCoffeeInBascket, bascket }) => {
     });
 };
 
+export const toggleFlagSide = (setFlagSideBar) => {
+    setFlagSideBar(prevFlag => !prevFlag);
+}
+export const toggleFlagCoffeePage = (setFlagCoffeePage) => {
+    setFlagCoffeePage(prevFlag => !prevFlag);
+}
+
 function App() {
   const [filteredCoffee, setFilteredCoffeeList] = useState("All");
   const [whichCoffeesInBascket, setWhichCoffeesInBascket] = useState([]);
-  const [flagSideBar, setFlagSiteBar] = useState(false);
+  const [flagSideBar, setFlagSideBar] = useState(false);
+  const [flagCoffeePage, setFlagCoffeePage] = useState(false);
 
- const AddCoffeeInBascket = (coffee) => {
+
+  const AddCoffeeInBascket = (coffee) => {
   
   setWhichCoffeesInBascket(prev => {
     const existing = prev.find(c => c.name === coffee.name);
@@ -70,9 +80,10 @@ function App() {
 
   return (
   <BrowserRouter>
-    <Sidebar open={flagSideBar} />
+    <Sidebar open={flagSideBar} setFlagSiteBar={setFlagSideBar} />
+    <CoffeePage open={flagCoffeePage} setFlagCoffeePage={setFlagCoffeePage}/>
     <div>
-      <div className="mainBox">
+      <div className={`mainBox ${flagCoffeePage ? 'invisible' : ''}`}>
         <div className="leftBox">
           <div className="scrollBox">
             <div className={`categoryCoffees ${filteredCoffee === "All" ? "activeCategory" : ""}`} onClick={() => setFilteredCoffeeList("All")}>
@@ -95,13 +106,13 @@ function App() {
         <div className="rightBox">
           <div className="headerBox">
             <input className="searchInput" placeholder="Browse your favourite coffee here.."/>
-            <div className="basketBox" onClick={()=>setFlagSiteBar(flag => !flag)}>
+            <div className="basketBox" onClick={()=>setFlagSideBar(flag => !flag)}>
               <img className="basketImage" src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="basket"/>
               <h2 className="basketCount">{whichCoffeesInBascket.length}</h2>
             </div>
           </div>
           <div className="mainBoxCoffee">
-            {<ShowCoffeeList filteredCoffee={filteredCoffee} AddCoffeeInBascket={AddCoffeeInBascket} bascket={whichCoffeesInBascket}/>}
+            {<ShowCoffeeList filteredCoffee={filteredCoffee} AddCoffeeInBascket={AddCoffeeInBascket} bascket={whichCoffeesInBascket} setFlagCoffeePage={setFlagCoffeePage}/>}
           </div>
         </div>
       </div>

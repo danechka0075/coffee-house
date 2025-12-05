@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+  font-family: "Georgia", serif;
+  background: #efefef;
+}
+
+.coffee-page {
+  display: none;
+}
+.coffee-page.open {
+  display: block;
+}
+

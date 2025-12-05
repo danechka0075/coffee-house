@@ -6,24 +6,24 @@ import CoffeePage from './CoffeePage';
 import { BrowserRouter } from "react-router-dom";
 
 let coffeeList = [
-  { "name": "Classic Cappuccino", type: "cappuccino", image: "/images/Classic Cappuccino.jpeg", size: "",  extra:"", count: 0, milkType: "", price: 530 },
-  { "name": "Iced Cappuccino", type: "cappuccino", image: "/images/Iced Cappuccino.jpeg", size: "",  extra:"", count: 0, milkType: "", price: 750 },
-  { "name": "Cinnamon Cappuccino", type: "cappuccino", image: "/images/ Cinnamon Cappuccino..jpeg", size: "", extra:"", count: 0, milkType: "", price: 530 },
-  { "name": "Double Shot Cappuccino", type: "cappuccino", image: "/images/Double Shot Cappuccino.jpeg", size: "", extra:"", count: 0, milkType: "", price: 750 },
+  { name: "Classic Cappuccino", type: "cappuccino", image: "/images/Classic Cappuccino.jpeg", description: "A classic blend of rich espresso poured into velvety steamed milk, topped with a smooth layer of airy foam.", size: "", extra: "", count: 0, milkType: "", price: 530 },
+  { name: "Iced Cappuccino", type: "cappuccino", image: "/images/Iced Cappuccino.jpeg", description: "A chilled espresso-based drink with cold milk and light foam, creating a refreshing and balanced flavor.", size: "", extra: "", count: 0, milkType: "", price: 750 },
+  { name: "Cinnamon Cappuccino", type: "cappuccino", image: "/images/ Cinnamon Cappuccino..jpeg", description: "A warm and aromatic cappuccino infused with cinnamon, delivering a cozy and mildly spicy sweetness.", size: "", extra: "", count: 0, milkType: "", price: 530 },
+  { name: "Double Shot Cappuccino", type: "cappuccino", image: "/images/Double Shot Cappuccino.jpeg", description: "A bold cappuccino featuring a double shot of espresso for a stronger, more intense coffee flavor.", size: "", extra: "", count: 0, milkType: "", price: 750 },
 
-  { "name": "Vanilla Latte", type: "latte", image: "/images/Vanilla Latte.jpeg", size: "", extra:"", count: 0, milkType: "", price: 750 },
-  { "name": "Caramel Latte", type: "latte", image: "/images/ Caramel Latte.jpeg", size: "", extra:"", count: 0, milkType: "", price: 790 },
-  { "name": "Iced Latte", type: "latte", image: "/images/iced Latte.jpeg", size: "",  extra:"", count: 0, milkType: "", price: 750 },
-  { "name": "Matcha Latte", type: "latte", image: "/images/Matcha Latte.jpeg", size: "", extra:"", count: 0, milkType: "", price: 790 },
+  { name: "Vanilla Latte", type: "latte", image: "/images/Vanilla Latte.jpeg", description: "A smooth latte sweetened with creamy vanilla syrup, creating a soft and comforting flavor profile.", size: "", extra: "", count: 0, milkType: "", price: 750 },
+  { name: "Caramel Latte", type: "latte", image: "/images/ Caramel Latte.jpeg", description: "A rich latte blended with buttery caramel syrup, offering a sweet and silky espresso experience.", size: "", extra: "", count: 0, milkType: "", price: 790 },
+  { name: "Iced Latte", type: "latte", image: "/images/iced Latte.jpeg", description: "A refreshing iced latte made with chilled milk and espresso, light, smooth, and perfectly balanced.", size: "", extra: "", count: 0, milkType: "", price: 750 },
+  { name: "Matcha Latte", type: "latte", image: "/images/Matcha Latte.jpeg", description: "A vibrant latte crafted from premium matcha powder and milk, offering a sweet earthy taste and gentle energy boost.", size: "", extra: "", count: 0, milkType: "", price: 790 },
 
-  { "name": "Iced Americano", type: "americano", image: "/images/Iced Americano.jpeg", size: "",  extra:"", count: 0, milkType: "", price: 570 },
-  { "name": "Americano with Lemon", type: "americano", image: "/images/ Americano with Lemon.jpeg", size: "", extra:"", count: 0, milkType: "", price: 570 },
+  { name: "Iced Americano", type: "americano", image: "/images/Iced Americano.jpeg", description: "A cool and refreshing Americano made with espresso and cold water over ice for a crisp, clean finish.", size: "", extra: "", count: 0, milkType: "", price: 570 },
+  { name: "Americano with Lemon", type: "americano", image: "/images/ Americano with Lemon.jpeg", description: "A bright and bold Americano enhanced with a slice of lemon, adding a refreshing citrus twist.", size: "", extra: "", count: 0, milkType: "", price: 570 },
 
-  { "name": "Flat White", type: "flatwhite", image: "/images/ Flat White.jpeg", size: "", milk: "", count: 0, price: 750 }
+  { name: "Flat White", type: "flatwhite", image: "/images/ Flat White.jpeg", description: "A smooth drink with a strong espresso base and a thin layer of silky microfoam for a rich and balanced taste.", size: "", milk: "", count: 0, price: 750 }
 ];
 
 
-const ShowCoffeeList = ({ filteredCoffee, AddCoffeeInBascket, bascket, setFlagCoffeePage}) => {
+const ShowCoffeeList = ({ filteredCoffee, AddCoffeeInBascket, RemoveCoffeeFromBascket, bascket, setFlagCoffeePage, setCoffee}) => {
   return coffeeList
     .filter(t => filteredCoffee === "All" || t.type === filteredCoffee.trim())
     .map(e => {
@@ -32,14 +32,16 @@ const ShowCoffeeList = ({ filteredCoffee, AddCoffeeInBascket, bascket, setFlagCo
       const count = inBasket ? inBasket.count : 0;
 
       return (
-        <div className="coffeeCard" onClick={() => setFlagCoffeePage(flag => !flag)}>
-          <img src={e.image} className="coffeeImage" />
+        <div className="coffeeCard" onClick={() => {setCoffee(e); setFlagCoffeePage(flag => !flag);}}>
+          <img src={e.image} className="coffeeImage" alt=""/>
           <h2 className="coffeeName">{e.name}</h2>
 
           <div className="footerCoffeeCard">
-            <button className={`removeToBasketButton ${count > 0 ? "" : "invisible"}`}>-</button>
+            <button className={`removeToBasketButton ${count > 0 ? "" : "invisible"}`} onClick={(t) =>{ RemoveCoffeeFromBascket(e); t.stopPropagation()}}>-</button>
             <h3 className="coffeePrice">{e.price} RUB</h3>
-            <button className="addToBasketButton" onClick={() => AddCoffeeInBascket(e)}>+</button>
+            <button className="addToBasketButton" onClick={(t) =>{ 
+              if(count>0) t.stopPropagation();
+              AddCoffeeInBascket(e)}}>+</button>
           </div>
 
           <h2 className={`coffeeCountInBasket ${count > 0 ? "" : "invisible"}`}>
@@ -62,8 +64,20 @@ function App() {
   const [whichCoffeesInBascket, setWhichCoffeesInBascket] = useState([]);
   const [flagSideBar, setFlagSideBar] = useState(false);
   const [flagCoffeePage, setFlagCoffeePage] = useState(false);
+  const [Coffee, setCoffee] = useState(null);
 
+  const RemoveCoffeeFromBascket = (coffee) => {
+    setWhichCoffeesInBascket(prev => {
+      const existing = prev.find(c => c.name === coffee.name);
 
+      if (existing.count === 1) {
+        return prev.filter(c => c.name !== coffee.name);
+      }
+      return prev.map(c =>
+        c.name === coffee.name ? { ...c, count: c.count - 1 } : c
+      );
+    });
+  };
   const AddCoffeeInBascket = (coffee) => {
   
   setWhichCoffeesInBascket(prev => {
@@ -81,7 +95,7 @@ function App() {
   return (
   <BrowserRouter>
     <Sidebar open={flagSideBar} setFlagSiteBar={setFlagSideBar} />
-    <CoffeePage open={flagCoffeePage} setFlagCoffeePage={setFlagCoffeePage}/>
+    <CoffeePage open={flagCoffeePage} setFlagCoffeePage={setFlagCoffeePage} Coffee={Coffee}/>
     <div>
       <div className={`mainBox ${flagCoffeePage ? 'invisible' : ''}`}>
         <div className="leftBox">
@@ -112,7 +126,7 @@ function App() {
             </div>
           </div>
           <div className="mainBoxCoffee">
-            {<ShowCoffeeList filteredCoffee={filteredCoffee} AddCoffeeInBascket={AddCoffeeInBascket} bascket={whichCoffeesInBascket} setFlagCoffeePage={setFlagCoffeePage}/>}
+            {<ShowCoffeeList filteredCoffee={filteredCoffee} RemoveCoffeeFromBascket={RemoveCoffeeFromBascket} AddCoffeeInBascket={AddCoffeeInBascket} bascket={whichCoffeesInBascket} setFlagCoffeePage={setFlagCoffeePage} setCoffee={setCoffee}/>}
           </div>
         </div>
       </div>

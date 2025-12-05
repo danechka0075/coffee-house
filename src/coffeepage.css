@@ -4,10 +4,167 @@ body {
   background: #efefef;
 }
 
-.coffee-page {
+.coffeepage {
   display: none;
 }
-.coffee-page.open {
+.coffeepage.open {
   display: block;
 }
+.header{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-top: 1%;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.back-arrow {
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.back-text {
+  letter-spacing: 1px;
+}
+
+.main {
+  display: flex;
+  gap: 14%;
+  margin-top: 5%;
+}
+
+.coffee-image img {
+  width: 430px;
+  border-radius: 20px;
+}
+
+.RightPanel {
+  width: 600px;
+}
+
+.basketBox {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.basketImage {
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+}
+
+.basketCount {
+  background-color: #b94733;
+  color: white;
+  font-size: 14px;
+  padding: 3px 8px;
+  border-radius: 50%;
+  position: absolute;
+  top: -5px;
+  right: -10px;
+}
+
+.title {
+  font-size: 48px;
+  margin: 10px 0;
+}
+
+.subtitle {
+  width: 90%;
+  line-height: 1.4;
+  font-size: 14px;
+  margin-bottom: 35px;
+}
+
+.section-title {
+  margin-top: 25px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.options-row {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.option,
+.option-pill {
+  padding: 15px 25px;
+  border-radius: 15px;
+  cursor: pointer;
+  user-select: none;
+  border: 2px solid transparent;
+  font-size: 15px;
+}
+
+.option {
+  width: 120px;
+  text-align: center;
+  background: white;
+}
+
+.option.selected {
+  background: #a58255;
+  color: white;
+}
+
+.option-pill {
+  background: white;
+  border-radius: 25px;
+}
+
+.option-pill.selected {
+  background: #a58255;
+  color: white;
+}
+
+
+.PriceRow {
+  display: flex;
+  margin: 30px 0;
+  gap : 30px;
+  align-items: center;
+}
+
+.price {
+  font-size: 38px;
+  font-weight: bold;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+}
+
+.counter button {
+  border: none;
+  background: none;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.order-btn {
+  width: 260px;
+  padding: 18px;
+  background: #c74b36;
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  letter-spacing: 1px;
+}
+
+
 

@@ -1,0 +1,25 @@
+.sidebar {
+  position: fixed;
+  right: -300px; 
+  top: 0;
+  width: 300px;
+  height: 100vh;
+  background: #222;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  transition: 0.3s;
+  z-index: 100;
+}
+
+.sidebar.open {
+  right: 0;
+}
+
+.sidebar a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}

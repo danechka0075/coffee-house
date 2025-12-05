@@ -175,9 +175,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 60%;
+  width: 90%;
   margin: 0 auto;
-  background-color: #DADADA;
   border-radius: 10px;
   padding: 10px;
 }

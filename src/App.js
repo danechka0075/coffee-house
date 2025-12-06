@@ -104,7 +104,7 @@ useEffect(() => {
 
   return (
   <BrowserRouter>
-    <Sidebar open={flagSideBar} setFlagSideBar={setFlagSideBar} bascket={whichCoffeesInBascket} AddCoffeeInBascket={AddCoffeeInBascket} RemoveCoffeeFromBascket={RemoveCoffeeFromBascket}/>
+    <Sidebar open={flagSideBar} setFlagSideBar={setFlagSideBar} setWhichCoffeesInBascket={setWhichCoffeesInBascket} bascket={whichCoffeesInBascket}/>
     <CoffeePage open={flagCoffeePage} setFlagSideBar={setFlagSideBar} setFlagCoffeePage={setFlagCoffeePage} Coffee={Coffee} setCoffee={setCoffee} AddCoffeeInBascket={AddCoffeeInBascket} whichCoffeesInBascket={whichCoffeesInBascket} setWhichCoffeesInBascket={setWhichCoffeesInBascket}/>
     <div>
       <div className={`mainBox ${flagCoffeePage ? 'invisible' : ''}`}>

@@ -1,25 +1,123 @@
 .sidebar {
   position: fixed;
-  right: -300px; 
+  right: -350px;
   top: 0;
-  width: 300px;
+  width: 350px;
   height: 100vh;
-  background: #222;
-  color: white;
+  background: #f5f0e1;
+  color: #222;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
   transition: 0.3s;
   z-index: 100;
+  overflow-y: auto;
 }
 
 .sidebar.open {
   right: 0;
 }
 
-.sidebar a {
-  color: white;
-  text-decoration: none;
+.closeBtn {
+  background: transparent;
+  color: #222;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.sidebarTitle {
+  margin-bottom: 15px;
+  font-size: 24px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.emptyBasket {
+  text-align: center;
+  margin-top: 50px;
   font-size: 18px;
+  color: #888;
+}
+
+.basketItems {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.basketItem {
+  display: flex;
+  gap: 10px;
+  background: #fff9f0;
+  padding: 10px;
+  border-radius: 8px;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.basketItemImage {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.basketItemInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.headerItemInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.basketItemName {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.basketCounter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 25px;
+  min-height: 25px;
+  background-color: #ffcd75;
+  color: #222;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 14px;
+  border: 2px solid #ffaa33;
+}
+
+.basketItemPrice {
+  font-size: 14px;
+  color: #555;
+  margin-top: 5px;
+}
+
+.basketFooter {
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid #ddd;
+}
+
+.orderAllBtn {
+  width: 100%;
+  padding: 10px;
+  background: #ff6b6b;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
 }

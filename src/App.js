@@ -109,46 +109,48 @@ useEffect(() => {
   );
   setCoffeeOnMain(filteredList.length > 0 ? filteredList : coffeeList);
 }, [SearchText]);
-  return (
-  <BrowserRouter>
-    <Sidebar open={flagSideBar} setFlagSideBar={setFlagSideBar} setWhichCoffeesInBascket={setWhichCoffeesInBascket} bascket={whichCoffeesInBascket}/>
-    <CoffeePage open={flagCoffeePage} setFlagSideBar={setFlagSideBar} setFlagCoffeePage={setFlagCoffeePage} Coffee={Coffee} setCoffee={setCoffee} AddCoffeeInBascket={AddCoffeeInBascket} whichCoffeesInBascket={whichCoffeesInBascket} setWhichCoffeesInBascket={setWhichCoffeesInBascket}/>
-    <div>
-      <div className={`mainBox ${flagCoffeePage ? 'invisible' : ''}`}>
-        <div className="leftBox">
-          <div className="scrollBox">
-            <div className={`categoryCoffees ${filteredCoffee === "All" ? "activeCategory" : ""}`} onClick={() => setFilteredCoffeeList("All")}>
-              <h2 className="textCategoryCoffee">All</h2>
-            </div>
-            <div className={`categoryCoffees ${filteredCoffee === "cappuccino" ? "activeCategory" : ""}`} onClick={() => setFilteredCoffeeList("cappuccino")}>
-              <h2 className="textCategoryCoffee">Cappuccino</h2>
-            </div>
-            <div className={`categoryCoffees ${filteredCoffee === "latte" ? "activeCategory" : ""}`} onClick={() => setFilteredCoffeeList("latte")}>
-              <h2 className="textCategoryCoffee">Latte</h2>
-            </div>
-            <div className={`categoryCoffees ${filteredCoffee === "americano" ? "activeCategory" : ""}`} onClick={() => setFilteredCoffeeList("americano")}>
-              <h2 className="textCategoryCoffee">Americano</h2>
-            </div>
-            <div className={`categoryCoffees ${filteredCoffee === "flatwhite" ? "activeCategory" : ""}`} onClick={() => setFilteredCoffeeList("flatwhite")}>
-              <h2 className="textCategoryCoffee">Flat White</h2>
-            </div>
-        </div>
-        </div>
-        <div className="rightBox">
-          <div className="headerBox">
-            <input className="searchInput" placeholder="Browse your favourite coffee here.." onChange={(e) => setSearchText(e.target.value === ''?'':e.target.value)}/>
-            <div className="basketBox" onClick={()=>setFlagSideBar(flag => !flag)}>
-              <img className="basketImage" src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="basket"/>
-              <h2 className="basketCount">{whichCoffeesInBascket.length}</h2>
+    return (
+    <BrowserRouter>
+      <Sidebar open={flagSideBar} setFlagSideBar={setFlagSideBar} setWhichCoffeesInBascket={setWhichCoffeesInBascket} bascket={whichCoffeesInBascket}/>
+      <CoffeePage open={flagCoffeePage} setFlagSideBar={setFlagSideBar} setFlagCoffeePage={setFlagCoffeePage} Coffee={Coffee} setCoffee={setCoffee} AddCoffeeInBascket={AddCoffeeInBascket} whichCoffeesInBascket={whichCoffeesInBascket} setWhichCoffeesInBascket={setWhichCoffeesInBascket}/>
+      
+      <div className={`page ${flagCoffeePage ? 'invisible' : ''}`}>
+        <div className="top">
+          <input className="searchInput" placeholder="Search" onChange={(e) => setSearchText(e.target.value === '' ? '' : e.target.value)} />
+          <div className="basketBox" onClick={() => setFlagSideBar(flag => !flag)}>
+            <img className="basketImage" src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="basket"/>
+            <h2 className="basketCount">{whichCoffeesInBascket.length}</h2>
+          </div>
+        </div> 
+        <div className="content">
+          <div className="leftBox">
+            <div className="scrollBox">
+              <div className={`categoryCoffees ${filteredCoffee === "All" ? "activeCategory" : ""}`} onClick={() => setFilteredCoffeeList("All")}>
+                <h2 className="textCategoryCoffee">All</h2>
+              </div>
+              <div className={`categoryCoffees ${filteredCoffee === "cappuccino" ? "activeCategory" : ""}`} onClick={() => setFilteredCoffeeList("cappuccino")}>
+                <h2 className="textCategoryCoffee">Cappuccino</h2>
+              </div>
+              <div className={`categoryCoffees ${filteredCoffee === "latte" ? "activeCategory" : ""}`} onClick={() => setFilteredCoffeeList("latte")}>
+                <h2 className="textCategoryCoffee">Latte</h2>
+              </div>
+              <div className={`categoryCoffees ${filteredCoffee === "americano" ? "activeCategory" : ""}`} onClick={() => setFilteredCoffeeList("americano")}>
+                <h2 className="textCategoryCoffee">Americano</h2>
+              </div>
+              <div className={`categoryCoffees ${filteredCoffee === "flatwhite" ? "activeCategory" : ""}`} onClick={() => setFilteredCoffeeList("flatwhite")}>
+                <h2 className="textCategoryCoffee">Flat White</h2>
+              </div>
             </div>
           </div>
-          <div className="mainBoxCoffee">
-            {<ShowCoffeeList coffeeOnMain={coffeeOnMain} filteredCoffee={filteredCoffee} RemoveCoffeeFromBascket={RemoveCoffeeFromBascket} AddCoffeeInBascket={AddCoffeeInBascket} bascket={whichCoffeesInBascket} setFlagCoffeePage={setFlagCoffeePage} Coffee={Coffee} setCoffee={setCoffee}/>}
+
+          <div className="main">
+            <div className="mainBoxCoffee">
+              {<ShowCoffeeList coffeeOnMain={coffeeOnMain} filteredCoffee={filteredCoffee} RemoveCoffeeFromBascket={RemoveCoffeeFromBascket} AddCoffeeInBascket={AddCoffeeInBascket} bascket={whichCoffeesInBascket} setFlagCoffeePage={setFlagCoffeePage} Coffee={Coffee} setCoffee={setCoffee}/>}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </BrowserRouter>
+    </BrowserRouter>
   );
 }
 

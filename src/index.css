@@ -1,16 +1,4 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+/* ===== base / reset ===== */
 * {
   margin: 0;
   padding: 0;
@@ -18,88 +6,82 @@ code {
   font-family: 'Segoe UI', Roboto, sans-serif;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
+  margin: 0;
   background-color: #F6F6F6;
 }
 
-.mainBox {
+.page {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.top {
   display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 100vh;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 0 25px 25px;
+  margin-right: 2%;
+  gap: 12px;
+  padding: 18px 3%;
+  background: transparent;
 }
-.mainBox.invisible {
-  display: none;
-}
-.mainBoxCoffee {
-  width: 100%;
-  display: grid;
-  justify-content: left;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
+.content {
+  display: flex;
   gap: 20px;
-  margin-right: 0%;
-  min-height: 320px;
-}
-
-@media (max-width: 1400px) {
-  .mainBoxCoffee {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 1000px) {
-  .mainBoxCoffee {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .mainBoxCoffee {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
-
-.rightBox {
-  margin-left: 20%;
-  padding: 25px;
-  min-width: 80%;
+  align-items: flex-start;
+  padding: 0 3% 3% 3%;
 }
 
 .leftBox {
   width: 14%;
+  min-width: 180px;
+  max-width: 260px;
+  max-height: 450px;
   background-color: #FFFFFF;
   border-radius: 20px;
   padding: 4rem 3%;
-  margin: 15% 9% 9% 3%;
+  margin: 10% 0 0 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: fixed; 
+  position: fixed;
 }
 
 .scrollBox {
   width: 100%;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding-bottom: 2rem;
 }
 
 .categoryCoffees {
   width: 100%;
   padding: 15px 5px;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.18s ease-in-out;
+  display: flex;
   justify-content: center;
+  align-items: center;
   border-radius: 10px;
-  margin-bottom: 10%;
+  margin-bottom: 12%;
   background-color: transparent;
-}
-
-.activeCategory {
-  background-color: #f4f1ec;
-  color: white;
 }
 
 .categoryCoffees:hover {
   background-color: #ecd4b4;
+}
+
+.activeCategory {
+  background-color: #f4f1ec;
+  color: #432c2c;
 }
 
 .textCategoryCoffee {
@@ -109,77 +91,46 @@ body {
   text-align: center;
 }
 
-.rightBox {
-  margin-left: 20%;
-  padding: 25px;
+.main {
+  flex: 1;
+  min-width: 0;
+  margin-left: 19%;
+  padding: 25px 0;
 }
 
-.headerBox {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 25px;
-  margin-right: 3%;
+.mainBoxCoffee {
+  width: 100%;
+  display: grid;
+  justify-content: left;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  min-height: 320px;
+  margin-right: 0;
 }
-
-.searchInput {
-  width: 75%;
-  padding: 15px 20px;
-  border-radius: 30px;
-  border: none;
-  background-color: #f4f1ec;
-  font-size: 16px;
-  outline: none;
-}
-
-.searchInput::placeholder {
-  color: #9b8d83;
-}
-
-.basketBox {
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.basketImage {
-  width: 45px;
-  height: 45px;
-  cursor: pointer;
-}
-
-.basketCount {
-  background-color: #b94733;
-  color: white;
-  font-size: 14px;
-  padding: 3px 8px;
-  border-radius: 50%;
-  position: absolute;
-  top: -5px;
-  right: -10px;
-}
-
 
 .coffeeCard {
-  background-color: #f4f1ec;
+  justify-content: center;
+  background-color: #ffffff;
   border-radius: 20px;
   padding: 15px;
   text-align: center;
   transition: transform 0.2s ease-in-out;
   cursor: pointer;
-
-}
-.coffeeImage {
-  width: 100%;
-  height: auto;
-  border-radius: 15px;
 }
 
 .coffeeCard:hover {
   transform: translateY(-5px);
 }
 
+.coffeeImage {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  display: block;
+}
+
 .coffeeName {
+  text-align: center;
   margin: 10px 0;
   font-size: 18px;
   color: #432c2c;
@@ -197,6 +148,7 @@ body {
   padding: 5px 12px;
   border-radius: 10px;
 }
+
 .footerCoffeeCard {
   display: flex;
   justify-content: space-between;
@@ -206,6 +158,7 @@ body {
   border-radius: 10px;
   padding: 10px;
 }
+
 .footerCoffeeCard.added{
   justify-content: center;
   gap: 14px;
@@ -218,31 +171,194 @@ body {
   border: none;
   border-radius: 1rem;
   padding: 0.6rem 1rem;
-  font-size: 1.2rem;
+  font-size: 1.0rem;
   font-weight: bold;
   cursor: pointer;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
+  transition: transform 0.15s ease;
 }
 
 .removeToBasketButton:hover,
 .addToBasketButton:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  transform: scale(1.06);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.12);
   background: #d1b084;
 }
 
 .removeToBasketButton:active,
 .addToBasketButton:active {
-  transform: scale(0.95);
-  box-shadow: 0 3px 7px rgba(0,0,0,0.1);
+  transform: scale(0.98);
+  box-shadow: 0 3px 7px rgba(0,0,0,0.08);
 }
+
 .coffeeCountInBasket {
   margin-top: 10px;
   font-size: 16px;
-  color:#b3ada4;;
+  color: #b3ada4;
 }
 
 .invisible {
   display: none;
+}
+
+.searchInput {
+  width: 75%;
+  max-width: 720px;
+  padding: 15px 20px;
+  border-radius: 30px;
+  border: none;
+  background-color: #f4f1ec;
+  font-size: 16px;
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: #9b8d83;
+}
+
+.basketBox {
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.basketImage {
+  width: 45px;
+  height: 45px;
+}
+
+.basketCount {
+  background-color: #b94733;
+  color: white;
+  font-size: 14px;
+  padding: 3px 8px;
+  border-radius: 50%;
+  position: absolute;
+  top: -5px;
+  right: -10px;
+}
+
+/*--Адаптивность--*/
+
+
+@media (max-width: 1400px) {
+  .mainBoxCoffee {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1200px) {
+  .leftBox {
+    min-width: 150px;
+    margin: 16% 0 0 0;
+  }
+  .top{
+    margin-right: 2%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .mainBoxCoffee {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 950px) {
+
+  .top {
+    padding: 10px 4%;
+  }
+
+  .content {
+    flex-direction: column;
+    gap: 18px;
+    padding: 0 4% 4% 4%;
+  }
+  .leftBox {
+    flex-direction: row;
+    justify-content: row;
+    position: relative;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: auto;
+    max-width: none;
+    max-height: 100px;
+    padding: 1.5rem 4%;
+    margin: 0;
+    border-radius: 16px;
+  }
+  .scrollBox {
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    margin-top: 16%;
+    gap: 12px;
+  }
+
+  .main {
+    margin-left: 0;
+    padding: 0;
+  }
+
+  .mainBoxCoffee {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .searchInput {
+    width: 70%;
+    padding: 12px 14px;
+    font-size: 15px;
+  }
+
+  .coffeeName {
+    font-size: clamp(14px, 4vw, 18px);
+  }
+
+  .removeToBasketButton,
+  .addToBasketButton {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.95rem;
+  }
+
+  .footerCoffeeCard {
+    padding: 8px;
+    width: 95%;
+  }
+}
+
+@media (max-width: 750px){
+    .categoryCoffees {
+        padding: 10px 4px;
+        font-size: 10px;
+    
+      }
+    .leftBox{
+      max-height: 80px;
+    }
+    .scrollBox{
+      margin-top: 20%;
+      gap: 8px;
+    }  
+}
+
+@media (max-width: 600px) {
+  .mainBoxCoffee {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .categoryCoffees{
+    padding: 8px 2px;
+    font-size: 9px;
+  }
+
+  .top {
+    gap: 8px;
+  }
+
+  .searchInput {
+    width: 100%;
+    max-width: none;
+  }
 }

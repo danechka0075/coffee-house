@@ -21,8 +21,8 @@ let coffeeList = [
   { name: "Flat White", type: "flatwhite", image: "/images/ Flat White.jpeg", description: "A smooth drink with a strong espresso base and a thin layer of silky microfoam for a rich and balanced taste.", size: "SHORT", extra: "NO ADDIVITES", count: 0, milkType: "REGULAR MILK", price: 750 }
 ];
 
-const ShowCoffeeList = ({ filteredCoffee, AddCoffeeInBascket, RemoveCoffeeFromBascket, bascket, setFlagCoffeePage, Coffee, setCoffee}) => {
-  return coffeeList
+const ShowCoffeeList = ({ coffeeOnMain, filteredCoffee, AddCoffeeInBascket, RemoveCoffeeFromBascket, bascket, setFlagCoffeePage, Coffee, setCoffee}) => {
+  return coffeeOnMain
     .filter(t => filteredCoffee === "All" || t.type === filteredCoffee.trim())
     .map((e, idx) => {
       const inBasket = bascket.find(c => c.name === e.name);
@@ -69,9 +69,11 @@ function App() {
   
   const [filteredCoffee, setFilteredCoffeeList] = useState('All');
   const [whichCoffeesInBascket, setWhichCoffeesInBascket] = useState(JSON.parse(localStorage.getItem("whichCoffeesInBascket")) || []);
+  const [coffeeOnMain, setCoffeeOnMain] = useState(coffeeList);
   const [flagSideBar, setFlagSideBar] = useState(false);
   const [flagCoffeePage, setFlagCoffeePage] = useState(false);
   const [Coffee, setCoffee] = useState(null);
+  const [SearchText, setSearchText] = useState("");
 
   const RemoveCoffeeFromBascket = (coffee) => {
     setWhichCoffeesInBascket(prev => {
@@ -101,7 +103,12 @@ function App() {
 useEffect(() => {
   Save(whichCoffeesInBascket)
 }, [whichCoffeesInBascket])
-
+useEffect(() => {
+  const filteredList = coffeeList.filter(coffee =>
+    coffee.name.toLowerCase().includes(SearchText.toLowerCase())
+  );
+  setCoffeeOnMain(filteredList.length > 0 ? filteredList : coffeeList);
+}, [SearchText]);
   return (
   <BrowserRouter>
     <Sidebar open={flagSideBar} setFlagSideBar={setFlagSideBar} setWhichCoffeesInBascket={setWhichCoffeesInBascket} bascket={whichCoffeesInBascket}/>
@@ -129,14 +136,14 @@ useEffect(() => {
         </div>
         <div className="rightBox">
           <div className="headerBox">
-            <input className="searchInput" placeholder="Browse your favourite coffee here.."/>
+            <input className="searchInput" placeholder="Browse your favourite coffee here.." onChange={(e) => setSearchText(e.target.value === ''?'':e.target.value)}/>
             <div className="basketBox" onClick={()=>setFlagSideBar(flag => !flag)}>
               <img className="basketImage" src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="basket"/>
               <h2 className="basketCount">{whichCoffeesInBascket.length}</h2>
             </div>
           </div>
           <div className="mainBoxCoffee">
-            {<ShowCoffeeList filteredCoffee={filteredCoffee} RemoveCoffeeFromBascket={RemoveCoffeeFromBascket} AddCoffeeInBascket={AddCoffeeInBascket} bascket={whichCoffeesInBascket} setFlagCoffeePage={setFlagCoffeePage} Coffee={Coffee} setCoffee={setCoffee}/>}
+            {<ShowCoffeeList coffeeOnMain={coffeeOnMain} filteredCoffee={filteredCoffee} RemoveCoffeeFromBascket={RemoveCoffeeFromBascket} AddCoffeeInBascket={AddCoffeeInBascket} bascket={whichCoffeesInBascket} setFlagCoffeePage={setFlagCoffeePage} Coffee={Coffee} setCoffee={setCoffee}/>}
           </div>
         </div>
       </div>

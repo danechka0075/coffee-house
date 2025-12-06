@@ -8,7 +8,9 @@ body {
   display: none;
 }
 .coffeepage.open {
-  display: block;
+  display: flex;
+  flex-direction: column;
+
 }
 .header{
     display: flex;
@@ -31,19 +33,27 @@ body {
   letter-spacing: 1px;
 }
 
-.main {
+.mainCoffeePage {
   display: flex;
-  gap: 14%;
-  margin-top: 5%;
+  gap: 40px;
+  margin-top: 3%;
+  align-items: flex-start;
+}
+
+.coffee-image {
+  flex-shrink: 0;
 }
 
 .coffee-image img {
-  width: 430px;
-  border-radius: 20px;
+  width: 100%;
+  max-width: 420px;    
+  height: auto;
+  display: block;
+  margin-left: 0;    
 }
 
 .RightPanel {
-  width: 600px;
+  margin-left: 15%;
 }
 
 .basketBox {
@@ -163,8 +173,136 @@ body {
   border: none;
   border-radius: 40px;
   cursor: pointer;
-  letter-spacing: 1px;
 }
 
 
+@media (max-width: 900px) {
+  .main {
+    flex-direction: row;
+    gap:0px;
+  }
+  .RightPanel {
+    width: 100%;
+    margin-left: 0px;
+  }
+  .header {
+    margin: 0 3%;
+  }
+  .title {
+    font-size: 28px;
+  }
+  .price {
+    font-size: 28px;
+  }
+  .order-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+
+  .mainCoffeePage {
+    gap: 25px;
+    margin-top: 2%;
+  }
+
+  .coffee-image img {
+    max-width: 350px;  
+  }
+
+  .RightPanel {
+    margin-left: 5%;
+    width: 70%;
+  }
+
+  .title {
+    font-size: 36px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    width: 100%;
+  }
+
+  .option,
+  .option-pill {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+
+  .PriceRow {
+    gap: 25px;
+  }
+
+  .price {
+    font-size: 30px;
+  }
+
+  .order-btn {
+    width: 80%;
+    font-size: 17px;
+    padding: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .mainCoffeePage {
+    flex-direction: column; 
+    align-items: center;
+    gap: 25px;
+  }
+
+  .coffee-image img {
+    max-width: 280px;
+  }
+
+  .RightPanel {
+    margin-left: 0;
+    width: 95%;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+
+  .section-title {
+    font-size: 12px;
+  }
+
+  .option,
+  .option-pill {
+    padding: 10px 18px;
+    font-size: 13px;
+    border-radius: 10px;
+  }
+
+  .PriceRow {
+    gap: 20px;
+  }
+
+  .price {
+    font-size: 26px;
+  }
+
+  .counter {
+    padding: 6px 14px;
+    gap: 10px;
+  }
+
+  .counter button {
+    font-size: 20px;
+  }
+
+  .order-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 28px;
+  }
+}
 

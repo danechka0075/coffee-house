@@ -42,9 +42,9 @@ export default function CoffeePage({open, setFlagSideBar, setFlagCoffeePage, Cof
           </div>
       </header>
 
-      <div className="main">
+      <div className="mainCoffeePage">
         <div className="coffee-image">
-          <img src="/images/Image coffee.png" alt="coffee" />
+          <img src={`/images/${Coffee.name}`+" (фон удален).png"} alt="coffee" />
         </div>
 
         <div className="RightPanel">

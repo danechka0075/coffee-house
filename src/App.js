@@ -27,15 +27,18 @@ const ShowCoffeeList = ({ filteredCoffee, AddCoffeeInBascket, RemoveCoffeeFromBa
     .map((e, idx) => {
       const inBasket = bascket.find(c => c.name === e.name);
       const count = inBasket ? inBasket.count : 0;
-      const displayPrice = count === 0 ? e.price : e.price * count;
+      const displayPrice = e.price;
 
       return (
         <div key={idx} className="coffeeCard" onClick={() => { setCoffee({...e, count: 1}); setFlagCoffeePage(true); }}>
           <img src={e.image} className="coffeeImage" alt=""/>
           <h2 className="coffeeName">{e.name}</h2>
-          <div className="footerCoffeeCard">
+          <h2 className={`coffeeCountInBasket ${count > 0 ? "" : "invisible"}`}>
+             {displayPrice} RUB
+          </h2>
+          <div className={`footerCoffeeCard ${count>0?"added":""}`}>
             <button className={`removeToBasketButton ${count > 0 ? "" : "invisible"}`} onClick={(t) =>{ RemoveCoffeeFromBascket(e); t.stopPropagation()}}>-</button>
-            <h3 className="coffeePrice">{displayPrice} RUB</h3>
+            <h3 className="coffeePrice">{count === 0 ? displayPrice + " RUB" : count}</h3>
             <button className="addToBasketButton" onClick={(t) => {
               t.stopPropagation();
               if (inBasket) {
@@ -47,9 +50,6 @@ const ShowCoffeeList = ({ filteredCoffee, AddCoffeeInBascket, RemoveCoffeeFromBa
             }}>+</button>
           </div>
 
-          <h2 className={`coffeeCountInBasket ${count > 0 ? "" : "invisible"}`}>
-             In Basket: {count}
-          </h2>
         </div>
       );
     });

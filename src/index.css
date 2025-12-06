@@ -181,6 +181,10 @@ body {
   border-radius: 10px;
   padding: 10px;
 }
+.footerCoffeeCard.added{
+  justify-content: center;
+  gap: 14px;
+}
 
 .removeToBasketButton,
 .addToBasketButton {
@@ -211,7 +215,7 @@ body {
 .coffeeCountInBasket {
   margin-top: 10px;
   font-size: 16px;
-  color: #432c2c;
+  color:#b3ada4;;
 }
 
 .invisible {

@@ -1,6 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Sidebar from "./Sidebar";
 import CoffeePage from './CoffeePage';
 import { BrowserRouter } from "react-router-dom";
@@ -22,21 +21,18 @@ let coffeeList = [
   { name: "Flat White", type: "flatwhite", image: "/images/ Flat White.jpeg", description: "A smooth drink with a strong espresso base and a thin layer of silky microfoam for a rich and balanced taste.", size: "SHORT", extra: "NO ADDIVITES", count: 0, milkType: "REGULAR MILK", price: 750 }
 ];
 
-
 const ShowCoffeeList = ({ filteredCoffee, AddCoffeeInBascket, RemoveCoffeeFromBascket, bascket, setFlagCoffeePage, setCoffee}) => {
   return coffeeList
     .filter(t => filteredCoffee === "All" || t.type === filteredCoffee.trim())
     .map((e, idx) => {
       const inBasket = bascket.find(c => c.name === e.name);
       const count = inBasket ? inBasket.count : 0;
-
-      const displayPrice = count > 0 ? count * e.price : e.price;
+      const displayPrice = e.price * (count > 0 ? count : 1);
 
       return (
         <div key={idx} className="coffeeCard" onClick={() => { setCoffee({...e, count: 1}); setFlagCoffeePage(true); }}>
           <img src={e.image} className="coffeeImage" alt=""/>
           <h2 className="coffeeName">{e.name}</h2>
-
           <div className="footerCoffeeCard">
             <button className={`removeToBasketButton ${count > 0 ? "" : "invisible"}`} onClick={(t) =>{ RemoveCoffeeFromBascket(e); t.stopPropagation()}}>-</button>
             <h3 className="coffeePrice">{displayPrice} RUB</h3>
@@ -67,8 +63,12 @@ export const toggleFlagCoffeePage = (setFlagCoffeePage) => {
 }
 
 function App() {
-  const [filteredCoffee, setFilteredCoffeeList] = useState("All");
-  const [whichCoffeesInBascket, setWhichCoffeesInBascket] = useState([]);
+  const Save = (NewWhichCoffeesInBascket) => {
+    localStorage.setItem('whichCoffeesInBascket', JSON.stringify(NewWhichCoffeesInBascket))
+  }
+  
+  const [filteredCoffee, setFilteredCoffeeList] = useState('All');
+  const [whichCoffeesInBascket, setWhichCoffeesInBascket] = useState(JSON.parse(localStorage.getItem("whichCoffeesInBascket")) || []);
   const [flagSideBar, setFlagSideBar] = useState(false);
   const [flagCoffeePage, setFlagCoffeePage] = useState(false);
   const [Coffee, setCoffee] = useState(null);
@@ -98,10 +98,14 @@ function App() {
   });
 };
 
+useEffect(() => {
+  Save(whichCoffeesInBascket)
+}, [whichCoffeesInBascket])
+
   return (
   <BrowserRouter>
     <Sidebar open={flagSideBar} setFlagSideBar={setFlagSideBar} bascket={whichCoffeesInBascket} AddCoffeeInBascket={AddCoffeeInBascket} RemoveCoffeeFromBascket={RemoveCoffeeFromBascket}/>
-    <CoffeePage open={flagCoffeePage} setFlagSideBar={setFlagSideBar} setFlagCoffeePage={setFlagCoffeePage} Coffee={Coffee} setCoffee={setCoffee} AddCoffeeInBascket={AddCoffeeInBascket}/>
+    <CoffeePage open={flagCoffeePage} setFlagSideBar={setFlagSideBar} setFlagCoffeePage={setFlagCoffeePage} Coffee={Coffee} setCoffee={setCoffee} AddCoffeeInBascket={AddCoffeeInBascket} whichCoffeesInBascket={whichCoffeesInBascket} setWhichCoffeesInBascket={setWhichCoffeesInBascket}/>
     <div>
       <div className={`mainBox ${flagCoffeePage ? 'invisible' : ''}`}>
         <div className="leftBox">

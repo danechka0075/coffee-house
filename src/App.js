@@ -21,13 +21,13 @@ let coffeeList = [
   { name: "Flat White", type: "flatwhite", image: "/images/ Flat White.jpeg", description: "A smooth drink with a strong espresso base and a thin layer of silky microfoam for a rich and balanced taste.", size: "SHORT", extra: "NO ADDIVITES", count: 0, milkType: "REGULAR MILK", price: 750 }
 ];
 
-const ShowCoffeeList = ({ filteredCoffee, AddCoffeeInBascket, RemoveCoffeeFromBascket, bascket, setFlagCoffeePage, setCoffee}) => {
+const ShowCoffeeList = ({ filteredCoffee, AddCoffeeInBascket, RemoveCoffeeFromBascket, bascket, setFlagCoffeePage, Coffee, setCoffee}) => {
   return coffeeList
     .filter(t => filteredCoffee === "All" || t.type === filteredCoffee.trim())
     .map((e, idx) => {
       const inBasket = bascket.find(c => c.name === e.name);
       const count = inBasket ? inBasket.count : 0;
-      const displayPrice = e.price * (count > 0 ? count : 1);
+      const displayPrice = count === 0 ? e.price : e.price * count;
 
       return (
         <div key={idx} className="coffeeCard" onClick={() => { setCoffee({...e, count: 1}); setFlagCoffeePage(true); }}>
@@ -136,7 +136,7 @@ useEffect(() => {
             </div>
           </div>
           <div className="mainBoxCoffee">
-            {<ShowCoffeeList filteredCoffee={filteredCoffee} RemoveCoffeeFromBascket={RemoveCoffeeFromBascket} AddCoffeeInBascket={AddCoffeeInBascket} bascket={whichCoffeesInBascket} setFlagCoffeePage={setFlagCoffeePage} setCoffee={setCoffee}/>}
+            {<ShowCoffeeList filteredCoffee={filteredCoffee} RemoveCoffeeFromBascket={RemoveCoffeeFromBascket} AddCoffeeInBascket={AddCoffeeInBascket} bascket={whichCoffeesInBascket} setFlagCoffeePage={setFlagCoffeePage} Coffee={Coffee} setCoffee={setCoffee}/>}
           </div>
         </div>
       </div>

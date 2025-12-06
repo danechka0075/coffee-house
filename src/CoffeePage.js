@@ -3,29 +3,36 @@ import "./coffeepage.css";
 import { toggleFlagCoffeePage } from './App.js'
 
 export default function CoffeePage({open, setFlagSideBar, setFlagCoffeePage, Coffee, setCoffee, AddCoffeeInBascket, whichCoffeesInBascket, setWhichCoffeesInBascket}) {
-  const [butExtra, setButExtra] = React.useState("NO ADDIVITES");
-  const [butSize, setButSize] = React.useState("SHORT");
-  const [butMilk, setButMilk] = React.useState("REGULAR MILK");
-  const sostDefault = () =>{
-    setButExtra("NO ADDIVITES")
-    setButMilk("REGULAR MILK")
-    setButSize("SHORT")
-  }
+
   const updateCoffee = (coffeeName, updatedFields) => {
     setWhichCoffeesInBascket(prev =>
     prev.map(c =>
       c.name === coffeeName
         ? { ...c, ...updatedFields }
         : c
-    )
-  );
-  };
+      )
+    );
+    setCoffee(prev => ({...prev, ...updatedFields}));
+    };
     if (!Coffee) return null;
-    console.log(Coffee.name);
+    console.log(Coffee.count);
+    const Whichprice = () => {
+      let price = Coffee.price;
+      if (Coffee.size !== "SHORT") {
+        price += 30;
+      }
+      if (Coffee.extra !== "NO ADDIVITES") {
+        price += 20;
+      }
+      if (Coffee.milkType !== "REGULAR MILK") {
+        price += 25;
+      }
+      return price;
+    }
     return (
     <div className={`coffeepage ${open ? "open" : ""}`}>
       <header className="header">
-        <div className="ButtonBack" onClick={()=>{sostDefault(); toggleFlagCoffeePage(setFlagCoffeePage)}}>
+        <div className="ButtonBack" onClick={()=>{toggleFlagCoffeePage(setFlagCoffeePage)}}>
             <span className="back-arrow">←</span>
             <span className="back-text">BACK TO MENU</span>
         </div>
@@ -46,29 +53,29 @@ export default function CoffeePage({open, setFlagSideBar, setFlagCoffeePage, Cof
 
           <div className="section-title">SIZE</div>
           <div className="options-row">
-            <div className={`option ${"SHORT" === butSize? "selected" : ""}`} onClick={()=>{setButSize("SHORT");updateCoffee(Coffee.name, { size: "SHORT" });}}> SHORT</div>
-            <div className={`option ${"TALL" === butSize? "selected" : ""}`} onClick={()=>{setButSize("TALL");updateCoffee(Coffee.name, { size: "TALL" });}}> TALL</div>
-            <div className={`option ${"GRANDE" === butSize? "selected" : ""}`} onClick={()=>{setButSize("GRANDE");updateCoffee(Coffee.name, { size: "GRANDE" });}}> GRANDE</div>
-            <div className={`option ${"VENTI" === butSize? "selected" : ""}`} onClick={()=>{setButSize("VENTI");updateCoffee(Coffee.name, { size: "VENTI" });}}> VENTI</div>
+            <div className={`option ${"SHORT" === Coffee.size? "selected" : ""}`} onClick={()=>{updateCoffee(Coffee.name, { size: "SHORT" });}}> SHORT</div>
+            <div className={`option ${"TALL" === Coffee.size? "selected" : ""}`} onClick={()=>{updateCoffee(Coffee.name, { size: "TALL" });}}> TALL</div>
+            <div className={`option ${"GRANDE" === Coffee.size? "selected" : ""}`} onClick={()=>{updateCoffee(Coffee.name, { size: "GRANDE" });}}> GRANDE</div>
+            <div className={`option ${"VENTI" === Coffee.size? "selected" : ""}`} onClick={()=>{updateCoffee(Coffee.name, { size: "VENTI" });}}> VENTI</div>
           </div>
 
           <div className="section-title">EXTRA</div>
           <div className="options-row">
-            <div className={`option-pill ${"NO ADDIVITES" === butExtra? "selected" : ""}`} onClick={()=>{setButExtra("NO ADDIVITES");updateCoffee(Coffee.name, { extra: "NO ADDIVITES" });}}> NO ADDIVITES</div>
-            <div className={`option-pill ${"SUGAR" === butExtra? "selected" : ""}`} onClick={()=>{setButExtra("SUGAR");updateCoffee(Coffee.name, { extra: "SUGAR" });}}> SUGAR</div>
-            <div className={`option-pill ${"MILK" === butExtra? "selected" : ""}`} onClick={()=>{setButExtra("MILK");updateCoffee(Coffee.name, { extra: "MILK" });}}> MILK</div>
+            <div className={`option-pill ${"NO ADDIVITES" === Coffee.extra? "selected" : ""}`} onClick={()=>{updateCoffee(Coffee.name, { extra: "NO ADDIVITES" });}}> NO ADDIVITES</div>
+            <div className={`option-pill ${"SUGAR" === Coffee.extra? "selected" : ""}`} onClick={()=>{updateCoffee(Coffee.name, { extra: "SUGAR" });}}> SUGAR</div>
+            <div className={`option-pill ${"MILK" === Coffee.extra? "selected" : ""}`} onClick={()=>{updateCoffee(Coffee.name, { extra: "MILK" });}}> MILK</div>
           </div>
 
           <div className="section-title">MILK TYPE</div>
           <div className="options-row">
-            <div className={`option-pill ${"REGULAR MILK" === butMilk? "selected" : ""}`} onClick={()=>{setButMilk("REGULAR MILK");updateCoffee(Coffee.name, { milk: "REGULAR MILK" });}}> REGULAR MILK</div>
-            <div className={`option-pill ${"OAT MILK" === butMilk? "selected" : ""}`} onClick={()=>{setButMilk("OAT MILK");updateCoffee(Coffee.name, { milk: "OAT MILK" });}}> OAT MILK</div>
-            <div className={`option-pill ${"SOY MILK" === butMilk? "selected" : ""}`} onClick={()=>{setButMilk("SOY MILK");updateCoffee(Coffee.name, { milk: "SOY MILK" });}}> SOY MILK</div>
-            <div className={`option-pill ${"ALMOND MILK" === butMilk? "selected" : ""}`} onClick={()=>{setButMilk("ALMOND MILK");updateCoffee(Coffee.name, { milk: "ALMOND MILK" });}}> ALMOND MILK</div>
+            <div className={`option-pill ${"REGULAR MILK" === Coffee.milkType? "selected" : ""}`} onClick={()=>{updateCoffee(Coffee.name, { milkType: "REGULAR MILK" });}}> REGULAR MILK</div>
+            <div className={`option-pill ${"OAT MILK" === Coffee.milkType? "selected" : ""}`} onClick={()=>{updateCoffee(Coffee.name, { milkType: "OAT MILK" });}}> OAT MILK</div>
+            <div className={`option-pill ${"SOY MILK" === Coffee.milkType? "selected" : ""}`} onClick={()=>{updateCoffee(Coffee.name, { milkType: "SOY MILK" });}}> SOY MILK</div>
+            <div className={`option-pill ${"ALMOND MILK" === Coffee.milkType? "selected" : ""}`} onClick={()=>{updateCoffee(Coffee.name, { milkType: "ALMOND MILK" });}}> ALMOND MILK</div>
           </div>
 
           <div className="PriceRow">
-          <div className="price">{Coffee.price*Coffee.count + " RUB"}</div>
+          <div className="price">{Whichprice()*Coffee.count + " RUB"}</div>
           <div className="counter">
             <button onClick={() => setCoffee(prev => ({...prev, count: Math.max(prev.count - 1, 1)}))}>-</button>
             <span>{Coffee.count}</span>

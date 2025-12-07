@@ -1,21 +1,21 @@
 import React from "react";
 import "./coffeepage.css";
-import { toggleFlagCoffeePage } from './App.js'
 
 export default function CoffeePage({open, setFlagSideBar, setFlagCoffeePage, Coffee, setCoffee, AddCoffeeInBascket, whichCoffeesInBascket, setWhichCoffeesInBascket}) {
+  if (!Coffee) return null;
 
   const updateCoffee = (coffeeName, updatedFields) => {
     setWhichCoffeesInBascket(prev =>
-    prev.map(c =>
-      c.name === coffeeName
-        ? { ...c, ...updatedFields }
-        : c
-      )
-    );
-    setCoffee(prev => ({...prev, ...updatedFields}));
+      prev.map(c =>
+        c.name === coffeeName
+          ? { ...c, ...updatedFields }
+          : c
+        )
+      );
+      setCoffee(prev => ({...prev, ...updatedFields}));
     };
-    if (!Coffee) return null;
-    console.log(Coffee.count);
+    
+
     const Whichprice = () => {
       let price = Coffee.price;
       if (Coffee.size !== "SHORT") {
@@ -29,10 +29,11 @@ export default function CoffeePage({open, setFlagSideBar, setFlagCoffeePage, Cof
       }
       return price;
     }
+
     return (
     <div className={`coffeepage ${open ? "open" : ""}`}>
       <header className="header">
-        <div className="ButtonBack" onClick={()=>{toggleFlagCoffeePage(setFlagCoffeePage)}}>
+        <div className="ButtonBack" onClick={()=>setFlagCoffeePage(false)}>
             <span className="back-arrow">←</span>
             <span className="back-text">BACK TO MENU</span>
         </div>
@@ -85,7 +86,7 @@ export default function CoffeePage({open, setFlagSideBar, setFlagCoffeePage, Cof
 
           <button className="order-btn" onClick={() => {
             AddCoffeeInBascket(Coffee);
-            toggleFlagCoffeePage(setFlagCoffeePage);
+            setFlagCoffeePage(false);
             }}>PLACE ORDER</button>
 
         </div>

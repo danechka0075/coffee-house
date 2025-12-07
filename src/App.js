@@ -55,13 +55,6 @@ const ShowCoffeeList = ({ coffeeOnMain, filteredCoffee, AddCoffeeInBascket, Remo
     });
 };
 
-export const toggleFlagSide = (setFlagSideBar) => {
-    setFlagSideBar(prevFlag => !prevFlag);
-}
-export const toggleFlagCoffeePage = (setFlagCoffeePage) => {
-    setFlagCoffeePage(prevFlag => !prevFlag);
-}
-
 function App() {
   const Save = (NewWhichCoffeesInBascket) => {
     localStorage.setItem('whichCoffeesInBascket', JSON.stringify(NewWhichCoffeesInBascket))

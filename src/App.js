@@ -21,16 +21,27 @@ let coffeeList = [
   { name: "Flat White", type: "flatwhite", image: "/images/ Flat White.jpeg", description: "A smooth drink with a strong espresso base and a thin layer of silky microfoam for a rich and balanced taste.", size: "SHORT", extra: "NO ADDIVITES", count: 0, milkType: "REGULAR MILK", price: 750 }
 ];
 
-const ShowCoffeeList = ({ coffeeOnMain, filteredCoffee, AddCoffeeInBascket, RemoveCoffeeFromBascket, bascket, setFlagCoffeePage, Coffee, setCoffee}) => {
+const ShowCoffeeList = ({ coffeeOnMain, filteredCoffee, AddCoffeeInBascket, RemoveCoffeeFromBascket, bascket, setCoffee, setFlagCoffeePage }) => {
   return coffeeOnMain
     .filter(t => filteredCoffee === "All" || t.type === filteredCoffee.trim())
     .map((e, idx) => {
       const inBasket = bascket.find(c => c.name === e.name);
       const count = inBasket ? inBasket.count : 0;
-      const displayPrice = e.price;
+      const displayPrice = e.price
 
       return (
-        <div key={idx} className="coffeeCard" onClick={() => { setCoffee({...e, count: 1}); setFlagCoffeePage(true); }}>
+        <div
+          key={idx}
+          className="coffeeCard"
+          onClick={() => {
+            if (inBasket) 
+              {setCoffee({ ...inBasket });
+            } else {
+              setCoffee({ ...e, count: 1, size: "SHORT", extra: "NO ADDIVITES", milkType: "REGULAR MILK" });
+            }
+            setFlagCoffeePage(true);
+          }}
+        >
           <img src={e.image} className="coffeeImage" alt=""/>
           <h2 className="coffeeName">{e.name}</h2>
           <h2 className={`coffeeCountInBasket ${count > 0 ? "" : "invisible"}`}>
@@ -81,17 +92,15 @@ function App() {
     });
   };
   const AddCoffeeInBascket = (coffee) => {
-  setWhichCoffeesInBascket(prev => {
-    const existing = prev.find(c => c.name === coffee.name);
+    setWhichCoffeesInBascket(prev => {
+      const existing = prev.find(c => c.name === coffee.name);
+      if (existing) {
+        return prev.map(c => c.name === coffee.name ? { ...c, count: c.count + 1 } : c);
+      }
+      return [...prev, { ...coffee, count: 1 }];
+    });
+  };
 
-    if (existing) {
-      return prev.map(c =>
-        c.name === coffee.name ? { ...c, count: c.count + coffee.count } : c
-      );
-    }
-    return [...prev, { ...coffee }];
-  });
-};
 
 useEffect(() => {
   Save(whichCoffeesInBascket)
@@ -105,7 +114,7 @@ useEffect(() => {
     return (
     <BrowserRouter>
       <Sidebar open={flagSideBar} setFlagSideBar={setFlagSideBar} setWhichCoffeesInBascket={setWhichCoffeesInBascket} bascket={whichCoffeesInBascket}/>
-      <CoffeePage open={flagCoffeePage} setFlagSideBar={setFlagSideBar} setFlagCoffeePage={setFlagCoffeePage} Coffee={Coffee} setCoffee={setCoffee} AddCoffeeInBascket={AddCoffeeInBascket} whichCoffeesInBascket={whichCoffeesInBascket} setWhichCoffeesInBascket={setWhichCoffeesInBascket}/>
+      <CoffeePage open={flagCoffeePage} remove={RemoveCoffeeFromBascket} setFlagSideBar={setFlagSideBar} setFlagCoffeePage={setFlagCoffeePage} Coffee={Coffee} setCoffee={setCoffee} AddCoffeeInBascket={AddCoffeeInBascket} whichCoffeesInBascket={whichCoffeesInBascket} setWhichCoffeesInBascket={setWhichCoffeesInBascket}/>
       
       <div className={`page ${flagCoffeePage ? 'invisible' : ''}`}>
         <div className="top">
@@ -138,7 +147,7 @@ useEffect(() => {
 
           <div className="main">
             <div className="mainBoxCoffee">
-              {<ShowCoffeeList coffeeOnMain={coffeeOnMain} filteredCoffee={filteredCoffee} RemoveCoffeeFromBascket={RemoveCoffeeFromBascket} AddCoffeeInBascket={AddCoffeeInBascket} bascket={whichCoffeesInBascket} setFlagCoffeePage={setFlagCoffeePage} Coffee={Coffee} setCoffee={setCoffee}/>}
+              {<ShowCoffeeList coffeeOnMain={coffeeOnMain} filteredCoffee={filteredCoffee} RemoveCoffeeFromBascket={RemoveCoffeeFromBascket} AddCoffeeInBascket={AddCoffeeInBascket} bascket={whichCoffeesInBascket} setFlagCoffeePage={setFlagCoffeePage} setCoffee={setCoffee}/>}
             </div>
           </div>
         </div>

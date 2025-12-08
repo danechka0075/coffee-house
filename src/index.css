@@ -206,13 +206,13 @@ body {
   padding: 15px 20px;
   border-radius: 30px;
   border: none;
-  background-color: #f4f1ec;
+  background-color: #a58255;
   font-size: 16px;
   outline: none;
 }
 
 .searchInput::placeholder {
-  color: #9b8d83;
+  color: #ebebeb;
 }
 
 .basketBox {
